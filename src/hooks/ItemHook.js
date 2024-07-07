@@ -15,7 +15,7 @@ function ItemHook({ items }) {
           <CardTitle className="font-weight-bold text-center">
             {snack.name}
           </CardTitle>
-          <CardText className="font-italic">{snack.description}</CardText>
+          <CardText className="font-italic"><b>Description: </b>{snack.description}</CardText>
           <p>
             <b>Recipe:</b> {snack.recipe}
           </p>
