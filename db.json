@@ -27,6 +27,17 @@
       "description": "Crisp!",
       "recipe": "Open can.",
       "serve": "Immediately."
+    },
+    {
+      "id": "262a",
+      "name": "Coke zero"
+    },
+    {
+      "id": "618b",
+      "name": "sprite",
+      "description": "fresh soda",
+      "recipe": "lemon lime",
+      "serve": "cold"
     }
   ],
   "snacks": [

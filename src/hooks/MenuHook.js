@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./FoodMenu.css";
+import "../FoodMenu.css";
 import {
   Card,
   CardBody,
@@ -10,23 +10,34 @@ import {
   ListGroupItem
 } from "reactstrap";
 
-function MenuHook({ items, title }) {
+function MenuHook({ snacks, drinks }) {
     /*Hook to take either a drink or snack item, with the drink
     or snack title, and add it to this page */
+    let items;
+    let url;
+    
+    if(snacks) {
+      items = snacks;
+      url = 'Snacks'
+    } else {
+      items = drinks;
+      url = 'Drinks';
+    }
+
+
   return (
     <section className="col-md-4">
       <Card>
         <CardBody>
           <CardTitle className="font-weight-bold text-center">
-            {title} Menu
+            {url} Menu
           </CardTitle>
           <CardText>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+            Here's a List of Our {url}
           </CardText>
           <ListGroup>
             {items.map(item => (
-              <Link to={`/${title}/${item.id}`} key={item.id}>
+              <Link to={`/${url.toLowerCase()}/${item.id}`} key={item.id}>
                 <ListGroupItem>{item.name}</ListGroupItem>
               </Link>
             ))}

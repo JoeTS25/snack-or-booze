@@ -7,15 +7,16 @@ import NavBar from "./NavBar";
 import { Route, Switch } from "react-router-dom";
 import MenuHook from "./hooks/MenuHook";
 import ItemHook from "./hooks/ItemHook";
-import AddItem from "./addItem";
 import ErrPage from "./404page";
+import ItemForm from "./itemForm";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [snacks, setSnacks] = useState([]);
   const [drinks, setDrinks] = useState([]);
+  
 
-  useEffect(() => {
+  /*useEffect(() => {
     async function getSnacks() {
       let snacks = await SnackOrBoozeApi.getSnacks();
       setSnacks(snacks);
@@ -31,7 +32,18 @@ function App() {
       setIsLoading(false);
     }
     getDrinks();
-  }, []);
+  }, []); */
+
+  useEffect(() => {
+    async function getData() {
+      let snacks = await SnackOrBoozeApi.getSnacks();
+      setSnacks(snacks);
+      let drinks = await SnackOrBoozeApi.getDrinks();
+      setDrinks(drinks);
+      setIsLoading(false)
+    }
+    getData();
+  }, [])
 
   if (isLoading) {
     return <p>Loading &hellip;</p>;
@@ -45,22 +57,22 @@ function App() {
         <main>
           <Switch>
             <Route exact path="/">
-              <Home items={snacks} />
+              <Home snacks={snacks} drinks={drinks} />
             </Route>
             <Route exact path="/snacks">
-              <MenuHook items={snacks} title="Snacks" />
+              <MenuHook snacks={snacks} title="Snacks" />
             </Route>
             <Route path="/snacks/:id">
               <ItemHook items={snacks} cantFind="/snacks" />
             </Route>
             <Route exact path="/drinks">
-              <MenuHook items={drinks} title="Drinks"/>
+              <MenuHook drinks={drinks} title="Drinks"/>
             </Route>
             <Route path="/drinks/:id">
               <ItemHook items={drinks} cantFind="/drinks"/>
             </Route>
             <Route path="/add">
-              <AddItem />
+              <ItemForm />
             </Route>
             <Route>
               <ErrPage />
